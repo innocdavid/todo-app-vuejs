@@ -10,19 +10,10 @@
 <body>
     <div id="app"></div>
 
-    <script>
-        let app = {
-            template: `
-                <h1>{{ greeting }}</h1>
-            `
-            ,
-            data() {
-                return {
-                    greeting: "Hello World"
-                }
-            }
-        }
-        Vue.createApp(app).mount("#app");
+    <script type="module">
+        import App from "./components/App.js";
+        
+        Vue.createApp(App).mount("#app");
     </script>
 </body>
 </html>
