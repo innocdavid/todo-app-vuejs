@@ -90,6 +90,29 @@ export default {
             <p v-show="assignments.filter(assignment => ! assignment.done).length === 0">There is no task in progress!</p>
         </section>
 
+
+        <section>
+            <h5>COMPLETED</h5>
+            <ul>
+                <li 
+                    v-for="assignment in assignments.filter(assignment => assignment.done )"
+                    :key="assignment.id"
+                >
+                    <label 
+                        class="text-decoration-line-through text-muted"
+                    >
+                        <input 
+                            type="checkbox"
+                            v-model="assignment.done" 
+                        />
+                        {{ assignment.name }}
+                    </label>
+                   
+                </li>
+            </ul>
+            <p v-show="assignments.filter(assignment => assignment.done).length === 0">There are no completed task</p>
+        </section>
+
         
 
     `   
