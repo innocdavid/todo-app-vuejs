@@ -4,6 +4,7 @@ export default {
         return {
             
             name: "MY CHORES",
+            newAssignment: "",
             assignments: [
                 { id: 0, name: "Going to church", done: false },
                 { id: 1, name: "Learning Java", done: false },
@@ -15,7 +16,12 @@ export default {
             toggleInputField: false
         }
     },
-    
+    methods: {
+        addTask() {
+            this.assignments.push({ id: this.assignments.id++, name: this.newAssignment, done: false });
+            this.newAssignment= "";
+        }
+    },
 
     template: `
         
@@ -39,11 +45,14 @@ export default {
             </div>
 
             <form
+                @submit.prevent="addTask"
                 class="mt-3"
                 v-show="toggleInputField"
                 style="display: flex; justifyContent: center; alignItems: center;"
             >
-                <input type="text" />
+                <input 
+                    v-model="newAssignment"
+                />
                 <button
                     style="marginLeft: 5px;"
                     class="border-0 p-2 rounded bg-muted"
