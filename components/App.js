@@ -10,16 +10,19 @@ export default {
                 { id: 1, name: "Learning Java", done: false },
                 { id: 2, name: "Learning HTML", done: false },
                 { id: 3, name: "Learning CSS", done: false },
-                { id: 4, name: "Watching Manchester vs Liverpool", done: false },
-                { id: 5, name: "Meeting Oliver later tonight", done: false }
+
             ],
             toggleInputField: false
         }
     },
+
     methods: {
         addTask() {
-            this.assignments.push({ id: this.assignments.id++, name: this.newAssignment, done: false });
+            this.assignments.push({ id: this.assignments.length++, name: this.newAssignment, done: false });
             this.newAssignment= "";
+        },
+        removeTask(assignment) {
+            this.assignments = this.assignments.filter(t => t !== assignment);
         }
     },
 
@@ -50,10 +53,13 @@ export default {
                 v-show="toggleInputField"
                 style="display: flex; justifyContent: center; alignItems: center;"
             >
-                <input 
+                <input
+                    required
+                    type="text"
                     v-model="newAssignment"
                 />
                 <button
+
                     style="marginLeft: 5px;"
                     class="border-0 p-2 rounded bg-muted"
                 >
@@ -71,11 +77,17 @@ export default {
                             v-model="assignment.done" 
                         />
                         {{ assignment.name }}
+                        <button
+                            @click="removeTask(assignment)"
+                            class="rounded-circle bg-danger  text-light border-0 "
+                        >
+                            X
+                        </button>
                     </label>
                     
                 </li>
             </ul>
-            <p v-show="assignments.filter(assignment => ! assignment.done).length === 0">Congrats! You completed all your tasks!</p>
+            <p v-show="assignments.filter(assignment => ! assignment.done).length === 0">There is no task in progress!</p>
         </section>
 
         
