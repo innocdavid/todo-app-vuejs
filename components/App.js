@@ -2,8 +2,6 @@
 export default {
     data() {
         return {
-            
-            name: "MY CHORES",
             newAssignment: "",
             assignments: [
                 { id: 0, name: "Going to church", done: false },
@@ -28,7 +26,7 @@ export default {
 
     template: `
         
-        <h3>MY CHORES</h3>
+        <h4>MY CHORES APP</h4>
         <section
             style="width: 300px; padding: 10px"
         >
@@ -71,7 +69,7 @@ export default {
             >
                 <li 
                     :key="assignment.id"
-                    v-for="assignment in assignments.filter(assignment => ! assignment.done )"
+                    v-for="assignment in assignments.filter(assignment => ! assignment.done ).reverse()"
                     class="list-group-item"
                 >
                     <label>
@@ -90,7 +88,12 @@ export default {
                     
                 </li>
             </ul>
-            <p v-show="assignments.filter(assignment => ! assignment.done).length === 0">There is no task in progress!</p>
+            <p 
+                v-show="assignments.filter(assignment => ! assignment.done).length === 0"
+                class="text-muted"
+            >
+                There is no task in progress!
+            </p>
         </section>
 
 
@@ -103,7 +106,7 @@ export default {
             >
                 <li 
                     :key="assignment.id"    
-                    v-for="assignment in assignments.filter(assignment => assignment.done )"
+                    v-for="assignment in assignments.filter(assignment => assignment.done).reverse()"
                     class="list-group-item"
                 >
                     <label 
@@ -118,7 +121,12 @@ export default {
                    
                 </li>
             </ul>
-            <p v-show="assignments.filter(assignment => assignment.done).length === 0">There are no completed task</p>
+            <p 
+                v-show="assignments.filter(assignment => assignment.done).length === 0"
+                class="text-muted"
+            >
+                There are no completed task!
+            </p>
         </section>
 
         
