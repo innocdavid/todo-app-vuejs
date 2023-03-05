@@ -18,38 +18,43 @@ export default {
     
 
     template: `
-
+        
         <h3>MY CHORES</h3>
         <section 
             style="width: 300px; "
         >
 
             <div 
-                style="display: flex; justifyContent: space-between; padding: 5px; alignItems: center;"
+                
+                class="d-flex justify-content-between p-1 align-items-center"
             >
-                <h4>IN PROGRESS</h4>
+                <h5>IN PROGRESS</h5>
                 <button
+                    :class="toggleInputField ? 'bg-danger' : 'bg-primary'"
                     @click="toggleInputField = ! toggleInputField"
-                    style="padding: 7px;"
+                    class="border-0 p-2 rounded text-light"
                 >
-                    {{ toggleInputField ? 'CANCEL TASK' : 'NEW TASK'}}
+                    {{ toggleInputField ? 'CANCEL'  : 'ADD' }}
                 </button>
             </div>
 
-            <div
+            <form
+                class="mt-3"
                 v-show="toggleInputField"
                 style="display: flex; justifyContent: center; alignItems: center;"
             >
                 <input type="text" />
                 <button
                     style="marginLeft: 5px;"
+                    class="border-0 p-2 rounded bg-muted"
                 >
                     ADD
                 </button>
-            </div>
+            </form>
             <ul>
                 <li 
-                    v-for="assignment in assignments"
+                    :key="assignment.id"
+                    v-for="assignment in assignments.filter(assignment => ! assignment.done )"
                 >
                     <label>
                         <input 
@@ -61,16 +66,11 @@ export default {
                     
                 </li>
             </ul>
+            <p v-show="assignments.filter(assignment => ! assignment.done).length === 0">Congrats! You completed all your tasks!</p>
         </section>
 
-        <ul>
-            <li v-for="assignment in assignments"> {{ assignment }} </li>
-        </ul>
+        
 
     `   
 }
 
-const titleSection = {
-    display: "flex", 
-    flexDirection: "row"
-}
