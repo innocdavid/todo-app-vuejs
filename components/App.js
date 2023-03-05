@@ -2,7 +2,7 @@
 export default {
     data() {
         return {
-            title: "IN PROGRESS",
+            
             name: "MY CHORES",
             assignments: [
                 { id: 0, name: "Going to church", done: false },
@@ -11,30 +11,41 @@ export default {
                 { id: 3, name: "Learning CSS", done: false },
                 { id: 4, name: "Watching Manchester vs Liverpool", done: false },
                 { id: 5, name: "Meeting Oliver later tonight", done: false }
-            ]
+            ],
+            toggleInputField: false
         }
     },
+    
+
     template: `
+
         <h3>MY CHORES</h3>
         <section 
             style="width: 300px; "
         >
+
             <div 
                 style="display: flex; justifyContent: space-between; padding: 5px; alignItems: center;"
             >
-                <h4>{{ title }}</h4>
+                <h4>IN PROGRESS</h4>
                 <button
-                    style="padding: 5px; backgroundColor: pink; border: none;"
+                    @click="toggleInputField = ! toggleInputField"
+                    style="padding: 7px;"
                 >
-                    ADD NEW
+                    {{ toggleInputField ? 'CANCEL TASK' : 'NEW TASK'}}
                 </button>
             </div>
 
             <div
+                v-show="toggleInputField"
                 style="display: flex; justifyContent: center; alignItems: center;"
             >
                 <input type="text" />
-                <button>ADD</button>
+                <button
+                    style="marginLeft: 5px;"
+                >
+                    ADD
+                </button>
             </div>
             <ul>
                 <li 
