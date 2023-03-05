@@ -29,8 +29,8 @@ export default {
     template: `
         
         <h3>MY CHORES</h3>
-        <section 
-            style="width: 300px; "
+        <section
+            style="width: 300px; padding: 10px"
         >
 
             <div 
@@ -49,7 +49,7 @@ export default {
 
             <form
                 @submit.prevent="addTask"
-                class="mt-3"
+                class="mt-3 mb-3"
                 v-show="toggleInputField"
                 style="display: flex; justifyContent: center; alignItems: center;"
             >
@@ -66,10 +66,13 @@ export default {
                     ADD
                 </button>
             </form>
-            <ul>
+            <ul
+                class="list-group"
+            >
                 <li 
                     :key="assignment.id"
                     v-for="assignment in assignments.filter(assignment => ! assignment.done )"
+                    class="list-group-item"
                 >
                     <label>
                         <input 
@@ -91,12 +94,17 @@ export default {
         </section>
 
 
-        <section>
+        <section
+            style="width: 300px; marginTop: 20px; padding: 10px "
+        >
             <h5>COMPLETED</h5>
-            <ul>
+            <ul
+                class="list-group"
+            >
                 <li 
+                    :key="assignment.id"    
                     v-for="assignment in assignments.filter(assignment => assignment.done )"
-                    :key="assignment.id"
+                    class="list-group-item"
                 >
                     <label 
                         class="text-decoration-line-through text-muted"
