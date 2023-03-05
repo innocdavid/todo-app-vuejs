@@ -16,15 +16,34 @@ export default {
     },
     template: `
         <h3>MY CHORES</h3>
-        <section>
-            <h5>{{ title }}</h5>
+        <section 
+            style="width: 300px; "
+        >
+            <div 
+                style="display: flex; justifyContent: space-between; padding: 5px; alignItems: center;"
+            >
+                <h4>{{ title }}</h4>
+                <button
+                    style="padding: 5px; backgroundColor: pink; border: none;"
+                >
+                    ADD NEW
+                </button>
+            </div>
+
+            <div
+                style="display: flex; justifyContent: center; alignItems: center;"
+            >
+                <input type="text" />
+                <button>ADD</button>
+            </div>
             <ul>
                 <li 
                     v-for="assignment in assignments"
                 >
                     <label>
                         <input 
-                            type="checkbox" 
+                            type="checkbox"
+                            v-model="assignment.done" 
                         />
                         {{ assignment.name }}
                     </label>
@@ -32,5 +51,15 @@ export default {
                 </li>
             </ul>
         </section>
+
+        <ul>
+            <li v-for="assignment in assignments"> {{ assignment }} </li>
+        </ul>
+
     `   
+}
+
+const titleSection = {
+    display: "flex", 
+    flexDirection: "row"
 }
